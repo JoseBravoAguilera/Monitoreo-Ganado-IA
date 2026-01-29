@@ -1,0 +1,17 @@
+# Datos y Binarios (Pesados/Bloqueados)
+mysql_data/
+legacy/
+*.exe
+*.bin
+
+# Archivos de Entorno de Desarrollo (Ruido)
+.pio/
+esp32_sensor/.pio/
+esp32_sensor/.vscode/
+.vscode/
+
+# Basura del Sistema y Python
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

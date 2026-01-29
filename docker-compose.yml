@@ -1,0 +1,75 @@
+version: '3.8'
+
+# PROYECTO: Sistema Integrado de Gestión Ganadera IIoT
+# AUTOR: José Bravo Aguilera (Ingeniero en Automatización)
+# OBJETIVO: Orquestación de servicios para Convergencia OT/IT
+
+services:
+  # 1. CAPA DE PERSISTENCIA (Data Lake Local)
+  # Centraliza telemetría de tags RFID y resultados del motor de IA.
+  db_industrial:
+    image: mysql:8.0
+    container_name: mysql_ganado
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-admin}
+      MYSQL_DATABASE: CONTROL_GANADERO
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - red_control_industrial
+    restart: unless-stopped # Más profesional que 'always' para mantenimiento
+
+  # 2. MOTOR DE INFERENCIA IA (Procesamiento Python)
+  # Lógica de detección de anomalías y sanidad animal.
+  ia_engine:
+    build: .
+    container_name: python_ia_cerebro
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=db_industrial # Inyección de dependencia para conexión resiliente
+    depends_on:
+      - db_industrial
+    networks:
+      - red_control_industrial
+    restart: unless-stopped
+
+  # 3. MONITOREO DE ACTIVOS Y KPI (Grafana)
+  # Visualización de métricas de continuidad operacional.
+  visualizacion_kpi:
+    image: grafana/grafana
+    container_name: grafana_dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - red_control_industrial
+    depends_on:
+      - db_industrial
+    restart: unless-stopped
+
+  # 4. GESTIÓN DE ESQUEMAS (Admin)
+  phpmyadmin_manager:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_gui
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=db_industrial
+    networks:
+      - red_control_industrial
+    depends_on:
+      - db_industrial
+
+networks:
+  red_control_industrial: # Nombre alineado a terminología de redes OT
+    driver: bridge
+
+volumes:
+  mysql_data:
+  grafana_data:
