@@ -4,7 +4,7 @@
 **Calificación:** Distinción Máxima (6.9)
 
 ## 🎯 Visión General
-Este proyecto implementa una solución ciberfísica (OT/IT) integral para la gestión ganadera. A través de la convergencia de hardware industrial (RFID + ESP32) y herramientas avanzadas de software (Docker, IA en Python, SQL), el sistema es capaz de detectar anomalías de salud y seguridad en tiempo real, transformando datos de sensores en decisiones estratégicas.
+Este proyecto implementa una solución ciberfísica (OT/IT) integral para la gestión ganadera. A través de la convergencia de hardware industrial (RFID + ESP32) y herramientas avanzadas de software (Docker, IA en Python, SQL), el sistema es capaz de detectar **anomalías de salud y brechas de seguridad (detección de intrusos)** en tiempo real, transformando datos de sensores en decisiones estratégicas.
 
 
 
@@ -18,9 +18,30 @@ Este proyecto implementa una solución ciberfísica (OT/IT) integral para la ges
 ## 🏗️ Arquitectura del Sistema
 El sistema se basa en una arquitectura de microservicios orquestada para garantizar la **Resiliencia** y la **Escalabilidad**:
 
-1. **Adquisición (Edge):** El ESP32 procesa lecturas RFID en el pórtico, aplicando una "Whitelist" local para asegurar la supervivencia del sistema incluso sin conexión al servidor central.
-2. **Procesamiento (Cerebro):** Un motor en Python recibe las tramas de datos y aplica reglas de lógica de negocio (Etología Bovina) para clasificar eventos como NORMAL, SANIDAD o CONTROL.
-3. **Persistencia y Análisis:** Los datos se almacenan en MySQL con un diseño de esquema optimizado mediante índices para analítica masiva mediante Pandas.
+1. **Adquisición (Edge):** El ESP32 procesa lecturas RFID aplicando una "Whitelist" local.
+2. **Procesamiento (Cerebro):** Motor en Python con lógica de **Ciberseguridad Perimetral** e Inferencia de Salud.
+3. **Persistencia y Análisis:** Almacenamiento optimizado en MySQL para analítica masiva.
+
+### 📐 Visualización de la Arquitectura (OT a IT)
+
+```mermaid
+graph TD
+    subgraph "CAPA OT (CAMPO)"
+        A[Bovino con Tag RFID] -->|Lectura| B(ESP32 + MFRC522)
+        B -->|Filtrado Whitelist| C{¿ID Válido?}
+    end
+
+    subgraph "CAPA IT (SERVIDOR DOCKER)"
+        C -->|Sí: JSON Data| D[API Gateway / Python]
+        D --> E[Motor de IA: Inferencia de Salud]
+        E -->|Anomalía Detectada| F[Alerta / Grafana]
+        E -->|Registro| G[(MySQL Database)]
+    end
+
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style E fill:#00ff00,stroke:#333,stroke-width:4px
+    style G fill:#0000ff,color:#fff
+```
 
 ## 📈 Metodología de Mejora Continua
 Para el desarrollo de este sistema se aplicó un enfoque basado en **DMAIC** y **Lean**, buscando optimizar el flujo de tránsito de los activos biológicos y minimizar los falsos positivos en las alertas de seguridad.
