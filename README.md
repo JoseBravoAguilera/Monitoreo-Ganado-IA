@@ -15,6 +15,13 @@ Este proyecto implementa una solución ciberfísica (OT/IT) integral para la ges
 - **Cerebro de IA:** Motor de Inferencia en Python para detección de anomalías.
 - **Visualización:** Grafana Dashboards para monitoreo de KPIs en tiempo real.
 
+## 🧠 Gestión de Ingeniería e IA
+Documentación de Arquitectura: Diseño de flujos y lógica de datos mediante Mermaid.js (Documentation as Code).
+
+Gestión de Conocimiento: Uso de NotebookLM para el entrenamiento en protocolos de hardware, síntesis de manuales técnicos y optimización de la base de conocimiento del proyecto.
+
+Productividad: Apalancamiento en IA Generativa para el refactorizado de código y aceleración de ciclos de depuración.
+
 ## 🏗️ Arquitectura del Sistema
 El sistema se basa en una arquitectura de microservicios orquestada para garantizar la **Resiliencia** y la **Escalabilidad**:
 
