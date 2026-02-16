@@ -53,6 +53,12 @@ graph TD
 ## 📈 Metodología de Mejora Continua
 Para el desarrollo de este sistema se aplicó un enfoque basado en **DMAIC** y **Lean**, buscando optimizar el flujo de tránsito de los activos biológicos y minimizar los falsos positivos en las alertas de seguridad. El sistema permite la etapa de "Medición"  y "Análisis" de manera automatizada.
 
+🛠️ Roadmap de Evolución Técnica:
+
+Resiliencia Operativa: Implementación de Healthchecks en Docker Compose para garantizar la secuencialidad crítica en el arranque de servicios.
+
+Estándares de Producción: Migración de credenciales a variables de entorno (.env) y gestión de secretos para alineación con políticas de Ciberseguridad OT.
+
 ## 🚀 Cómo Desplegar
 El sistema está diseñado para ser "Plug & Play" mediante contenedores:
 
