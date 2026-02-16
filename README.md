@@ -10,7 +10,7 @@ Este proyecto implementa una solución ciberfísica (OT/IT) integral para la ges
 
 ## 🛠️ Stack Tecnológico
 - **Capa Edge (OT):** ESP32, MFRC522 (RFID), C++ (PlatformIO).
-- **Capa de Infraestructura:** Docker & Docker Compose (Microservicios).
+- **Capa de Infraestructura:** Docker & Docker Compose (Microservicios) para aislamiento de procesos.
 - **Capa de Datos:** MySQL (Persistencia), Pandas (ETL & Analítica).
 - **Cerebro de IA:** Motor de Inferencia en Python para detección de anomalías.
 - **Visualización:** Grafana Dashboards para monitoreo de KPIs en tiempo real.
@@ -51,7 +51,7 @@ graph TD
 ```
 
 ## 📈 Metodología de Mejora Continua
-Para el desarrollo de este sistema se aplicó un enfoque basado en **DMAIC** y **Lean**, buscando optimizar el flujo de tránsito de los activos biológicos y minimizar los falsos positivos en las alertas de seguridad.
+Para el desarrollo de este sistema se aplicó un enfoque basado en **DMAIC** y **Lean**, buscando optimizar el flujo de tránsito de los activos biológicos y minimizar los falsos positivos en las alertas de seguridad. El sistema permite la etapa de "Medición"  y "Análisis" de manera automatizada.
 
 ## 🚀 Cómo Desplegar
 El sistema está diseñado para ser "Plug & Play" mediante contenedores:
